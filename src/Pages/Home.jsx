@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import logo from "../Assets/Images/book-salf.png";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const textRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (textRef.current) {
+      const rect = textRef.current.getBoundingClientRect();
+      // Calculate position as percentages
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      setMousePos({ x, y });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col items-center">
       <nav className="w-full p-6 flex justify-start">
@@ -16,9 +30,20 @@ const Home = () => {
         
         {/* Text Section */}
         <div className="flex-1 text-center lg:text-left space-y-6">
-          <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-tight">
+          {/* Dynamic Text Effect Section */}
+          <h1 
+            ref={textRef}
+            onMouseMove={handleMouseMove}
+            className="text-5xl lg:text-7xl font-extrabold leading-tight cursor-default select-none bg-clip-text text-transparent transition-colors duration-300"
+            style={{
+              backgroundColor: '#0f172a', // Base color (Slate 900)
+              backgroundImage: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, #2563eb 0%, #0f172a 35%)`,
+              WebkitBackgroundClip: 'text',
+            }}
+          >
             Your personal library, <br />
           </h1>
+
           <p className="text-xl text-slate-600 max-w-xl mx-auto lg:mx-0">
             The social network for bookworms. Track your reading, share reviews, 
             and discover your next favorite story with a global community.
@@ -26,10 +51,10 @@ const Home = () => {
           
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4">
             <button className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-200 transition-all transform hover:-translate-y-1 active:scale-95 text-lg">
-              Register
+              <Link to="/signup">Register</Link>
             </button>
             <button className="px-8 py-4 bg-white border-2 border-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 transition-all text-lg hover:-translate-y-1 active:scale-95">
-              Login
+              <Link to="/signin">Signin</Link>
             </button>
           </div>
         </div>
