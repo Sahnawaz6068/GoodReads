@@ -20,7 +20,7 @@ const Home = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col items-center">
       <nav className="w-full p-6 flex justify-start">
         <div className="flex items-center gap-2 group cursor-pointer">
-          <img className="h-12 w-12 object-contain transition-transform group-hover:rotate-12" src={logo} alt="Logo" />
+          <img className="h-20 w-20 object-contain transition-transform group-hover:rotate-12 rounded-full " src={logo} alt="Logo" />
           <span className="text-2xl font-bold text-slate-800 tracking-tight">BookShelf</span>
         </div>
       </nav>
