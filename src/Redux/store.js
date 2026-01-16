@@ -6,4 +6,5 @@ export default configureStore({
     auth : authSliceReducer
   },
   devTools: true,
+  middleware: (getDefaultMiddleware)=> getDefaultMiddleware({serializableCheck: false})
 });

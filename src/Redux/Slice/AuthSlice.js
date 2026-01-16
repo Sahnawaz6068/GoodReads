@@ -22,11 +22,35 @@ export const signUp = createAsyncThunk("auth/signup", async (data) => {
   }
 });
 
+export const signIn = createAsyncThunk("auth/signin", async (data) => {
+  try {
+    const response = axiosInstancce.post("signin", data);
+    toast.promise(response, {
+      loading: "Submitting form",
+      success: "Successfully signip",
+    });
+    return await response;
+  } catch (error) {
+    console.log(error);
+    toast.error(error.message);
+  }
+});
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
-  extraReducers: () => {},
+  extraReducers: (builder) => {
+    builder.addCase(signIn.fulfilled, (state,action)=>{
+        const receivedData = action?.payload?.data?.data;
+        state.isLoggedIn = (action?.payload?.data?.data!==undefined);
+        state.username = action?.payload?.data?.data?.username;
+        state.token = action?.payload?.data?.data?.token;
+        localStorage.setItem('isLoggedIn', action?.payload?.data?.data!==undefined);
+        localStorage.setItem('token',action?.payload?.data?.data?.token);
+        localStorage.setItem('username',action?.payload?.data?.data?.username)
+    })
+  },
 });
 
 export default authSlice.reducer;

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { signIn } from "../../Redux/Slice/AuthSlice";
 
 export default function Signin() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [signinDetails, setSignInDetails] = useState({
     email: "",
     password: "",
@@ -15,10 +19,22 @@ export default function Signin() {
       [name]: value,
     });
   }
-//Onsubmit 
-  function onFormSubmit(e) {
+
+  function resetForm() {
+    setSignInDetails({
+      email: "",
+      password: "",
+    });
+  }
+  //Onsubmit
+  async function onFormSubmit(e) {
     e.preventDefault();
     console.log(signinDetails);
+    const respose = await dispatch(signIn(signinDetails));
+    if(respose?.payload?.data){
+      navigate('/');
+    }
+    resetForm();
   }
 
   return (
@@ -38,10 +54,7 @@ export default function Signin() {
         </div>
 
         {/* Form Section */}
-        <form
-          onSubmit={onFormSubmit}
-          className="space-y-5"
-        >
+        <form onSubmit={onFormSubmit} className="space-y-5">
           <div className="space-y-2">
             <label className="text-sm font-medium text-slate-700 ml-1">
               Email Address
