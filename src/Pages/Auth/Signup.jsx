@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Signup() {
+
+  const [signupDetails,setSignupDetails] = useState({
+    userName:"",
+    email:"",
+    password:""
+  })
+
+  function handleFormData(e){
+    const {name,value}= e.target;
+    setSignupDetails({
+      ...signupDetails,
+      [name]:value
+    })
+  }
+
+  function onFormSubmit(e){
+    e.preventDefault();
+    console.log(signupDetails);
+  }
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 px-4">
       <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
@@ -20,7 +39,7 @@ export default function Signup() {
         </div>
 
         {/* Form Section */}
-        <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={onFormSubmit} className="space-y-5">
           
           <div className="space-y-2">
             <label className="text-sm font-medium text-slate-700 ml-1">Username</label>
@@ -28,6 +47,9 @@ export default function Signup() {
               type="text" 
               placeholder="e.g. bookworm_99" 
               className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all outline-none"
+              name="userName"
+              value={signupDetails.userName}
+              onChange={handleFormData}
             />
           </div>
           <div className="space-y-2">
@@ -36,6 +58,9 @@ export default function Signup() {
               type="email" 
               placeholder="name@example.com" 
               className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all outline-none"
+              name="email"
+              value={signupDetails.email}
+              onChange={handleFormData}
             />
           </div>
 
@@ -45,6 +70,9 @@ export default function Signup() {
               type="password" 
               placeholder="••••••••" 
               className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all outline-none"
+              name="password"
+              value={signupDetails.password}
+              onChange={handleFormData}
             />
           </div>
 
