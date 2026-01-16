@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { signUp } from "../../Redux/Slice/AuthSlice";
 
 export default function Signup() {
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [signupDetails,setSignupDetails] = useState({
-    userName:"",
+    username:"",
     email:"",
     password:""
   })
@@ -17,9 +22,11 @@ export default function Signup() {
     })
   }
 
-  function onFormSubmit(e){
+  async function onFormSubmit(e){
     e.preventDefault();
-    console.log(signupDetails);
+    // console.log(signupDetails);
+    const respose = await dispatch(signUp(signupDetails));
+    console.log(respose);
   }
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 px-4">
@@ -47,8 +54,8 @@ export default function Signup() {
               type="text" 
               placeholder="e.g. bookworm_99" 
               className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all outline-none"
-              name="userName"
-              value={signupDetails.userName}
+              name="username"
+              value={signupDetails.username}
               onChange={handleFormData}
             />
           </div>
