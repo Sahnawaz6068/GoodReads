@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../../Redux/Slice/AuthSlice";
+import Layout from "../../Layout/Layout";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ export default function Signup() {
     resetForm();
   }
   return (
+    <Layout>
     <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 px-4">
       <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
         <div className="text-center mb-8">
@@ -113,5 +115,6 @@ export default function Signup() {
         <span>←</span> Back to home
       </Link>
     </div>
+    </Layout>
   );
 }
