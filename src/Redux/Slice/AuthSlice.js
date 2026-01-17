@@ -17,8 +17,9 @@ export const signUp = createAsyncThunk("auth/signup", async (data) => {
     });
     return await response;
   } catch (error) {
+    const errMsg =  error.response.data.message || "Something went wrong";
     console.log(error);
-    toast.error(error.message);
+    toast.error(errMsg);
   }
 });
 
@@ -31,8 +32,9 @@ export const signIn = createAsyncThunk("auth/signin", async (data) => {
     });
     return await response;
   } catch (error) {
-    console.log(error);
-    toast.error(error.message);
+    const message = error?.response?.data?.message || "Something went wrong";
+    console.log(message);
+    toast.error(message);
   }
 });
 
@@ -41,15 +43,17 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(signIn.fulfilled, (state,action)=>{
-        const receivedData = action?.payload?.data?.data;
-        state.isLoggedIn = (action?.payload?.data?.data!==undefined);
-        state.username = action?.payload?.data?.data?.username;
-        state.token = action?.payload?.data?.data?.token;
-        localStorage.setItem('isLoggedIn', action?.payload?.data?.data!==undefined);
-        localStorage.setItem('token',action?.payload?.data?.data?.token);
-        localStorage.setItem('username',action?.payload?.data?.data?.username)
-    })
+    builder.addCase(signIn.fulfilled, (state, action) => {
+      state.isLoggedIn = action?.payload?.data?.data !== undefined;
+      state.username = action?.payload?.data?.data?.username;
+      state.token = action?.payload?.data?.data?.token;
+      localStorage.setItem(
+        "isLoggedIn",
+        action?.payload?.data?.data !== undefined
+      );
+      localStorage.setItem("token", action?.payload?.data?.data?.token);
+      localStorage.setItem("username", action?.payload?.data?.data?.username);
+    });
   },
 });
 
