@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import logo from "../Assets/Images/book-salf.png";
 import { Link } from "react-router-dom";
 import Layout from "../Layout/Layout";
 
@@ -10,7 +9,6 @@ const Home = () => {
   const handleMouseMove = (e) => {
     if (textRef.current) {
       const rect = textRef.current.getBoundingClientRect();
-      // Calculate position as percentages
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
       setMousePos({ x, y });
@@ -21,18 +19,14 @@ const Home = () => {
     <Layout>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col items-center">
 
-
-        {/* Hero Content */}
         <main className="flex-1 flex flex-col lg:flex-row items-center justify-center px-6 max-w-7xl mx-auto gap-12 lg:gap-24">
-          {/* Text Section */}
           <div className="flex-1 text-center lg:text-left space-y-6">
-            {/* Dynamic Text Effect Section */}
             <h1
               ref={textRef}
               onMouseMove={handleMouseMove}
               className="text-5xl lg:text-7xl font-extrabold leading-tight cursor-default select-none bg-clip-text text-transparent transition-colors duration-300"
               style={{
-                backgroundColor: "#0f172a", // Base color (Slate 900)
+                backgroundColor: "#0f172a",
                 backgroundImage: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, #2563eb 0%, #0f172a 35%)`,
                 WebkitBackgroundClip: "text",
               }}
@@ -56,7 +50,6 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Decorative Element */}
           <div className="flex-1 w-full max-w-md lg:max-w-none">
             <div className="relative">
               <div className="aspect-square bg-blue-100 rounded-3xl overflow-hidden shadow-2xl border-8 border-white transform rotate-3 hover:rotate-0 transition-transform duration-500">
