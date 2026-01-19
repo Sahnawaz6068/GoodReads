@@ -10,7 +10,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20 md:h-24">
           
-          <Link to="/dashboard" className="flex items-center gap-3 group cursor-pointer">
+          <Link to="/" className="flex items-center gap-3 group cursor-pointer">
             <img 
               className="h-14 w-14 md:h-18 md:w-18 object-contain transition-transform group-hover:rotate-12 rounded-full" 
               src={logo} 
