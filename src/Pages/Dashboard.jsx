@@ -27,11 +27,7 @@ const Dashboard = () => {
             bookState.bookList.map((book) => (
               <BookCard
                 key={book._id}
-                title={book.title}
-                description={book.description}
-                pages={book.pages}
-                author={book.author}
-                imageUrl={book.imageUrl}
+                data={book}
               />
             ))}
         </div>
