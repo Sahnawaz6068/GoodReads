@@ -22,7 +22,7 @@ const Navbar = () => {
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <Link to="/shelves" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">Shelves</Link>
+            <Link to="/shelf" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">Shelves</Link>
             <Link to="/dashboard" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">Dashboard</Link>
             <button className="bg-red-50 text-red-600 px-4 py-2 rounded-lg font-medium hover:bg-red-100 transition-all">
               Logout
@@ -52,7 +52,7 @@ const Navbar = () => {
         <div className="md:hidden bg-white border-t border-slate-100 animate-in slide-in-from-top duration-300">
           <div className="px-4 pt-2 pb-6 space-y-2">
             <Link 
-              to="/shelves" 
+              to="/shelf" 
               className="block px-4 py-3 text-base font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-xl"
               onClick={() => setIsOpen(false)}
             >

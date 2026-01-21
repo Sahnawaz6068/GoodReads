@@ -5,6 +5,7 @@ import Signup from "../Pages/Auth/Signup";
 import Signin from "../Pages/Auth/Signin";
 import Dashboard from "../Pages/Dashboard";
 import BookDescription from "../Pages/BookDescription";
+import Shelf from "../Pages/Shelf";
 
 export default function MainRoute(){
     return (
@@ -14,6 +15,7 @@ export default function MainRoute(){
             <Route path="/signin" element={<Signin/>}></Route>
             <Route path="/dashboard" element={<Dashboard/>}></Route>
             <Route path="/book/description" element={<BookDescription/>}></Route>
+            <Route path="/shelf" element={<Shelf/>}></Route>
             <Route path="*" element={<NotFound/>}></Route>
         </Routes>
     )
