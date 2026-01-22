@@ -9,13 +9,12 @@ const BookDescription = () => {
     if (!book) {
         return <Layout><div className="p-10">No book data available.</div></Layout>;
     }
-
     return (
         <Layout>
             <div className="max-w-6xl mx-auto px-4 py-8 md:py-16">
                 <div className="flex flex-col md:flex-row gap-8 lg:gap-16 items-start">
                     
-                    <div className="w-full md:w-80 lg:w-96 flex-shrink-0 shadow-2xl rounded-lg overflow-hidden">
+                    <div className="w-full md:w-80 lg:w-96 shadow-2xl rounded-lg overflow-hidden">
                         <img 
                             src={book.imageUrl} 
                             alt={book.title} 
@@ -34,6 +33,7 @@ const BookDescription = () => {
                             </span>
                             <span className="text-gray-300">|</span>
                             <span className="text-gray-500">{book.pages} pages</span>
+                            <span className="bg-gray-500 px-4 py-1 text-white font-bold rounded-md">{book?.genres[0]?.name}</span>
                         </div>
 
                         <div className="border-t border-b border-gray-100 py-6 mb-6">

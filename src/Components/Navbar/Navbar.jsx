@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../Assets/Images/book-salf.png";
+import { useDispatch } from "react-redux";
+import { logout } from "../../Redux/Slice/AuthSlice";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+
+   const handleLogout = () => {
+    dispatch(logout());
+    navigate("/signin");
+  };
 
   return (
     <nav className="w-full bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100">
@@ -24,7 +34,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-8">
             <Link to="/shelf" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">Shelves</Link>
             <Link to="/dashboard" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">Dashboard</Link>
-            <button className="bg-red-50 text-red-600 px-4 py-2 rounded-lg font-medium hover:bg-red-100 transition-all">
+            <button onClick={handleLogout} className="bg-red-50 text-red-600 px-4 py-2 rounded-lg font-medium hover:bg-red-100 transition-all">
               Logout
             </button>
           </div>
@@ -68,7 +78,7 @@ const Navbar = () => {
             <div className="pt-4 border-t border-slate-100">
               <button 
                 className="w-full text-left px-4 py-3 text-base font-medium text-red-600 hover:bg-red-50 rounded-xl"
-                onClick={() => setIsOpen(false)}
+                onClick={handleLogout}
               >
                 Logout
               </button>

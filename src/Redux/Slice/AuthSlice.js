@@ -43,10 +43,11 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state)=>{
-      state.isLoggedIn = false,
-      state.token = '',
-      state.username = '',
-      localStorage.clear()
+      state.isLoggedIn = false;
+      state.token = '';
+      state.username = '';
+      localStorage.clear();
+      toast.success("You loggedout")
     }
   },
   extraReducers: (builder) => {
