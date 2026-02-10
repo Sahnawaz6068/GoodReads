@@ -15,7 +15,7 @@ const Dashboard = () => {
       
     }
   }
-
+console.log(bookState)
   useEffect(() => {
     loadBooks();
   }, []);

@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../Layout/Layout";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBooksShelves } from "../Redux/Slice/ShelfSlice";
 
 const Shelf = () => {
+  const dispatch = useDispatch();
+  const shelfState = useSelector((state) => state.shelf);
+  console.log(shelfState);
+  async function loadShelf() {
+    if (shelfState.shelfList.Length === 0) {
+      const response = dispatch(getAllBooksShelves);
+      console.log(response);
+    }
+  }
+
+  useEffect(() => {
+    loadShelf();
+  }, []);
+
   return (
     <Layout>
       <div className="mx-auto max-w-6xl px-8 py-12">
@@ -17,7 +33,6 @@ const Shelf = () => {
               currently reading
             </button>
           </aside>
-
           <main className="flex-1">
             <div className="overflow-hidden bg-white border border-gray-100 rounded-xl shadow-sm">
               <table className="w-full text-left border-collapse">
@@ -36,35 +51,10 @@ const Shelf = () => {
                     </th>
                   </tr>
                 </thead>
-
-                <tbody className="divide-y divide-gray-50">
-                  <tr className="hover:bg-gray-50 transition-colors">
-                    <td className="flex items-center space-x-4 px-6 py-4">
-                      <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-lg border border-gray-200 bg-gray-100">
-                        <img
-                          src="https://via.placeholder.com/150"
-                          alt="Cover"
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                      <span className="font-medium text-gray-800">
-                        Una pallottola Spuntata
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-center text-gray-600">5</td>
-                    <td className="px-6 py-4 text-right">
-                      <div className="text-xs font-bold uppercase tracking-widest">
-                        Kabir
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 text-center text-gray-600">
-                      Story
-                    </td>
-                     <button className="text-xs font-bold uppercase text-blue-400 hover:text-blue-500 tracking-widest">
-                        Detail
-                      </button>
-                  </tr>
-                </tbody>
+                {shelfState.shelfList.length>0 && 
+                shelfState.shelfList.map((shelf)=>(
+                  <h1 key={shelf._id}>hello</h1>
+                ))}
               </table>
             </div>
           </main>
